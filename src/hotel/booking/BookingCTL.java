@@ -146,7 +146,18 @@ public class BookingCTL {
 		
 		CreditCard creditCard = new CreditCard(type, number, ccv);
 		boolean approved = CreditAuthorizer.getInstance().authorize(creditCard, cost);
-		
+		if(approved) {
+			long confirmationNumber = hotel.book(room, guest, arrivalDate, stayLength, occupantNumber, creditCard);
+			String roomDescription = room.getDescription();
+			int roomNumber = room.getId();
+			String guestName = guest.getName();
+			String creditCardVendor = creditCard.getVendor();
+			bookingUI.displayConfirmedBooking(roomDescription, roomNumber, arrivalDate, stayLength, guestName, creditCardVendor, number, cost, confirmationNumber);
+			state = State.COMPLETED;
+			bookingUI.setState(BookingUI.State.COMPLETED);
+		} else {
+			bookingUI.displayMessage("Credit Card could not be authorized");
+		}
 	}
 
 
