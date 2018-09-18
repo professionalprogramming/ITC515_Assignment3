@@ -107,6 +107,9 @@ public class Hotel {
 
 	public void addServiceCharge(int roomId, ServiceType serviceType, double cost) {
 		// TODO Auto-generated method stub
+		Booking booking = findActiveBookingByRoomId(roomId);
+		
+		booking.addServiceCharge(serviceType, cost);
 	}
 
 	
