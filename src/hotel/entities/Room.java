@@ -80,4 +80,18 @@ public class Room {
 		}
 	}
 	
-          
+          // Done by SAI
+	public void checkout(Booking booking) {
+		if(state!= State.OCCUPIED)
+			throw new RuntimeException("Room is not OCCUPIED");
+		else{
+			state = State.READY;
+			for (Booking b : bookings) {
+				b.isCheckedOut();
+			}
+		}
+	}
+
+
+}
+
