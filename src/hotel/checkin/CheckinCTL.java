@@ -77,12 +77,25 @@ public class CheckinCTL {
 			}
 		}
 	}
-
-	
+        // Done by SAI
 	public void checkInConfirmed(boolean confirmed) {
-		// TODO Auto-generated method stub
-	}
-
+		
+		if (state != State.CONFIRMING) {
+			String mesg = String.format("CheckInCTL: Not Confirmed Check again", state);
+			throw new RuntimeException(mesg);
+		}
+		if(confirmed){
+			hotel.checkin(confirmationNumber);
+			checkInUI.displayMessage("Checking in confirmed");
+			state = State.COMPLETED;
+			checkInUI.setState(CheckinUI.State.COMPLETED);
+		}else{
+			checkInUI.displayMessage("Checking in cancelled");
+			state = State.CANCELLED;
+			checkInUI.setState(CheckinUI.State.CANCELLED);
+		}
+		
+	}//Done by SAI
 
 	public void cancel() {
 		checkInUI.displayMessage("Checking in cancelled");
