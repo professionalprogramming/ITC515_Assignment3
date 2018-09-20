@@ -67,11 +67,21 @@ public class Room {
 
 	public void checkin() {
 		// TODO Auto-generated method stub
+		if (this.state =! state.READY) {
+			String mesg = String.format("Room: checkin : Room is not Ready");
+			throw new RuntimeException(mesg);
+		}
+		this.state = state.OCCUPIED;
 	}
 
 
 	public void checkout(Booking booking) {
 		// TODO Auto-generated method stub
+		if (this.state =! state.OCCUPIED) {
+			String mesg = String.format("Room: checkout : Room is not occupied");
+			throw new RuntimeException(mesg);
+		}
+		this.state = state.READY;
 	}
 
 
