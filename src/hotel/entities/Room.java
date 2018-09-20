@@ -58,12 +58,15 @@ public class Room {
 		return state == State.READY;
 	}
 
-
+         // Done by SAI
 	public Booking book(Guest guest, Date arrivalDate, int stayLength, int numberOfOccupants, CreditCard creditCard) {
-		// TODO Auto-generated method stub
-		return null;		
+	
+		Booking newBooking = new Booking(guest , this, arrivalDate, stayLength, numberOfOccupants, creditCard);
+		bookings.add(newBooking);
+		isAvailable(arrivalDate, stayLength);
+		newBooking.isPending();
+		return newBooking;		
 	}
-
 
 	public void checkin() {
 		// TODO Auto-generated method stub
