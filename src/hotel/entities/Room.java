@@ -68,14 +68,16 @@ public class Room {
 		return newBooking;		
 	}
 
+	// Done by SAI
 	public void checkin() {
-		// TODO Auto-generated method stub
+		if(state!= State.READY)
+			throw new RuntimeException("Room is not READY");
+		else{
+			state = State.OCCUPIED;
+			for (Booking b : bookings) {
+				b.isCheckedIn();
+			}
+		}
 	}
-
-
-	public void checkout(Booking booking) {
-		// TODO Auto-generated method stub
-	}
-
-
-}
+	
+          
