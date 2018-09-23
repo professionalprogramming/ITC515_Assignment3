@@ -95,16 +95,36 @@ public class Hotel {
 	
 	public void checkin(long confirmationNumber) {
 		// TODO Auto-generated method stub
+		Booking booking = findBookingByConfirmationNumber(confirmationNumber);
+		if (booking == null) {
+			String mesg = String.format("Hotel: checkin : no booking found for confirmation number");
+			throw new RuntimeException(mesg);
+		}
+		booking.checkIn();
+		activeBookingsByRoomId.put(booking.getRoomId(), booking);
 	}
 
 
 	public void addServiceCharge(int roomId, ServiceType serviceType, double cost) {
 		// TODO Auto-generated method stub
+		Booking booking = findActiveBookingByRoomId(roomId);
+		if (booking == null) {
+			String mesg = String.format("Hotel: addServiceCharge : no booking found for room id");
+			throw new RuntimeException(mesg);
+		}
+		booking.addServiceCharge(serviceType, cost);
 	}
 
 	
 	public void checkout(int roomId) {
 		// TODO Auto-generated method stub
+
+		Booking booking = findActiveBookingByRoomId(roomId);
+		if (booking == null) {
+			String mesg = String.format("Hotel: checkout : no booking found for room id");
+			throw new RuntimeException(mesg);
+		}
+		booking.checkOut();
 	}
 
 
