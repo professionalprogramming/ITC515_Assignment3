@@ -120,11 +120,20 @@ public class Hotel {
 		// TODO Auto-generated method stub
 
 		Booking booking = findActiveBookingByRoomId(roomId);
+ 		if (booking == null) {
+ 			String mesg = String.format("Hotel: checkout : no booking found for room id");
+ 			throw new RuntimeException(mesg);
+ 		}
+ 		booking.checkOut();
+
+
+		Booking booking = findActiveBookingByRoomId(roomId);
 		if (booking == null) {
 			String mesg = String.format("Hotel: checkout : no booking found for room id");
 			throw new RuntimeException(mesg);
 		}
 		booking.checkOut();
+
 	}
 
 
