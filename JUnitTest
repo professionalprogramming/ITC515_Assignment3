@@ -21,9 +21,9 @@ import org.junit.Test;
  *
  * @author sanjeevannadarasa
  */
-public class SanjeevJUnitTest {
+public class JUnitTest {
     
-    public SanjeevJUnitTest() {
+    public JUnitTest() {
     }
     
     @BeforeClass
