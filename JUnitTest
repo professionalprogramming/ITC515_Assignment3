@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-// this check test done by sanjeevan_116221876
+// this check test done by sanjeevan_11621876
 
 import hotel.entities.Booking;
 import hotel.entities.ServiceCharge;
@@ -57,7 +57,7 @@ public class JUnitTest {
         chargeList = booking.getCharges();
         assertEquals(expectedResult,chargeList);
     }
-    // this check test done by sanjeevan_116221876
+    // this check test done by sanjeevan_11621876
 
     @Test
     public void testCheckIn() {
@@ -68,7 +68,7 @@ public class JUnitTest {
         isCheckedIn = booking.isCheckedIn();
         assertEquals(expectedResult,isCheckedIn);
     }
-    // this check test done by sanjeevan_116221876
+    // this check test done by sanjeevan_11621876
 
     @Test
     public void testCheckOut() {
