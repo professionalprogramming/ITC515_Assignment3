@@ -16,7 +16,7 @@ import hotel.utils.IOUtils;
 public class BookingCTL {
 	
 	
-	private static enum State {PHONE, ROOM, REGISTER, TIMES, CREDIT, APPROVED, CANCELLED, COMPLETED}	
+	public static enum State {PHONE, ROOM, REGISTER, TIMES, CREDIT, APPROVED, CANCELLED, COMPLETED}	
 	
 	private BookingUI bookingUI;
 	private Hotel hotel;
@@ -135,19 +135,26 @@ public class BookingCTL {
 		}
 	}
 
-
+	
 	public void creditDetailsEntered(CreditCardType type, int number, int ccv) {
 		// TODO Auto-generated method stub
 
-		if (state != State.CREDIT) {
+		if (state != State.CREDIT) {  //state of credit card should be credit
+			//exception handling
 			String mesg = String.format("BookingCTL: creditDetailsEntered : bad state : %s", state);
 			throw new RuntimeException(mesg);
 		}
 		
+		//new credit card
 		CreditCard creditCard = new CreditCard(type, number, ccv);
+		//status of credit card approval
 		boolean approved = CreditAuthorizer.getInstance().authorize(creditCard, cost);
+		//if approved
 		if(approved) {
+			
+			//booking hotel room
 			long confirmationNumber = hotel.book(room, guest, arrivalDate, stayLength, occupantNumber, creditCard);
+			//room details
 			String roomDescription = room.getDescription();
 			int roomNumber = room.getId();
 			String guestName = guest.getName();
