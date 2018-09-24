@@ -1,5 +1,6 @@
 package hotel.entities;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -88,8 +89,14 @@ public class Hotel {
 	public long book(Room room, Guest guest, 
 			Date arrivalDate, int stayLength, int occupantNumber,
 			CreditCard creditCard) {
-		// TODO Auto-generated method stub
-		return 0L;		
+		if(room.isAvailable(arrivalDate, stayLength)){
+            room.book(guest, arrivalDate, stayLength, occupantNumber, creditCard);
+            
+            Booking booking = new Booking(guest, room, arrivalDate, stayLength, occupantNumber, creditCard);
+            return booking.getConfirmationNumber();
+        }else{
+            return 0L;
+        }	
 	}
 
 	
@@ -110,9 +117,11 @@ public class Hotel {
 		Booking booking = findActiveBookingByRoomId(roomId);
 		if (booking == null) {
 			String mesg = String.format("Hotel: addServiceCharge : no booking found for room id");
-			throw new RuntimeException(mesg);
-		}
+			System.out.println(mesg);
+			//throw new RuntimeException(mesg);
+		}else {
 		booking.addServiceCharge(serviceType, cost);
+		}
 	}
 
 	
@@ -121,9 +130,10 @@ public class Hotel {
 		Booking booking = findActiveBookingByRoomId(roomId);
 		if (booking == null) {
 			String mesg = String.format("Hotel: checkout : no booking found for room id");
-			throw new RuntimeException(mesg);
-		}
+			System.out.println(mesg);
+		}else {
 		booking.checkOut();
+		}
 	}
 
 
